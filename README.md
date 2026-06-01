@@ -41,3 +41,5 @@ npm create vite@latest .
     <Link to="/"></Link>
 ```
 - `useNavigate()`
+- 3100 임O훈 1-1	날짜 표시?	★	Date, 컴포넌트 렌더링
+- 3108 윤건 2-11 상단고정(pin) ★★ boolean 값, 정렬 로직 

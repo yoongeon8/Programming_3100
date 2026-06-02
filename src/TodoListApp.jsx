@@ -7,6 +7,7 @@ import TodoHeader from './components/TodoHeader.jsx'
 import TodoAdder from './components/TodoAdder.jsx'
 // import TodoItem from './components/TodoItem.jsx'
 import TodoList from './components/TodoList.jsx'
+import Button from './components/Button.jsx';
 
 class Todo {
     constructor(text) {
@@ -60,10 +61,14 @@ function TodoListApp() {
             )
         )
     }
+    const allDeleteTodo = () => {
+        setTodos([]);
+    }
     return (
         <div className="todo">
             <TodoHeader />
             <TodoAdder addTodo={addTodo} />
+            <Button className='todo__button todo__button--all_delete' onClick={allDeleteTodo}>전체 삭제</Button>
             <TodoList todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} editTodo={editTodo} />
         </div>
     )

@@ -61,6 +61,9 @@
     color: #999;
     text-decoration: line-through;
 }
+.todo__button--all_delete {
+    color: #000;
+}
 
 /* .todo__item--complete 밑에 .todo__label을 흐리게, 취소선하자
 

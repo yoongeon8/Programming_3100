@@ -14,6 +14,7 @@ class Todo {
         this.id = Date.now();       //할일 고유 id: 만든시각. new Date().getTime()
         this.text = text;           //할일 내용
         this.isCompleted = false;   //완료 여부: 기본값 false
+        this.pined = false;
     }
 }
 const TODOS_STORAGE_KEY = "todos";
@@ -32,11 +33,11 @@ function TodoListApp() {
     }, [todos]);     //[](mount할 때 한번 실행), [todos]에 있는 state가 바뀌면, 그 앞 함수정의 를 호출하자
 
     const addTodo = (text) => setTodos((todos) => [
+        new Todo(text),
         //이전 todos 복사하자
-        ...todos,
+        ...todos
         //newTodo 만들자
         //이전 todos에 추가하자
-        new Todo(text)
     ]);
     // const addTodo = (text) => setTodos((todos) => [...todos, new Todo(text)]
     const toggleTodo = (id) => {
@@ -64,12 +65,21 @@ function TodoListApp() {
     const allDeleteTodo = () => {
         setTodos([]);
     }
+    const pinTodo = (id) => {
+        setTodos((todos) =>
+            todos.map((todo) =>
+                todo.id === id ? {...todo, pined: !todo.pined} : todo
+            )
+        )
+    }
+    const sortedTodos = [...todos].sort((a,b) => b.pined - a.pined);
     return (
         <div className="todo">
             <TodoHeader />
             <TodoAdder addTodo={addTodo} />
             <Button className='todo__button todo__button--all_delete' onClick={allDeleteTodo}>전체 삭제</Button>
             <TodoList todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} editTodo={editTodo} />
+            <TodoList todos={sortedTodos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} editTodo={editTodo} pinTodo={pinTodo} />
         </div>
     )
 }
